@@ -1,3 +1,5 @@
+// Another file to collect the packaged API routes
+
 const router = require('express').Router();
 const apiRoutes = require('./api');
 
