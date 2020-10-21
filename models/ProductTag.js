@@ -23,7 +23,7 @@ ProductTag.init(
     },
     tag_id: {
       type: DataTypes.INTEGER,
-      // REF TAG MODEL'S ID
+      // REF TAG MODEL ID
       references: {
         model: 'tag',
         key: 'id'
