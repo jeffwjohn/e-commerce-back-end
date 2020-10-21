@@ -58,7 +58,7 @@ router.get('/:id', (req, res) => {
 
 // create new product (THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
 router.post('/', (req, res) => {
- 
+ console.log('req:', req.body);
   Product.create({
       /* req.body should look like this...
     {
@@ -73,6 +73,8 @@ router.post('/', (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     tagIds: req.body.tagIds
+    // category_id: req.body.category_id,
+    
 
   }) // (THE REST OF THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
     .then((product) => {
