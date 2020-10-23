@@ -59,25 +59,17 @@ router.get('/:id', (req, res) => {
 // create new product (THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
 router.post('/', (req, res) => {
  console.log('req:', req.body);
-  Product.create({
-      /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
-
-    product_name: req.body.product_name,
-    price: req.body.price,
-    stock: req.body.stock,
-    tagIds: req.body.tagIds
-    // category_id: req.body.category_id,
-    
-
-  }) // (THE REST OF THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
-    .then((product) => {
+  Product.create( req.body
+// {
+//   include: [
+//     {
+//       model: Tag,
+//       attributes: ['id'],
+//       as: 'tagIds'
+//     }
+//   ]
+// } // (THE REST OF THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
+   ) .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
