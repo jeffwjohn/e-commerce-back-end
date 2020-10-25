@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
-
+const db = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
@@ -8,18 +8,7 @@ router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   Product.findAll({
-    include: [
-      {
-        model: Category, 
-        
-      }
-    ],
-    // include: [
-    //   {
-    //     model: Tag, 
-        
-    //   }
-    // ]
+    include: [db.Category, db.Tag],
   })
     .then(dbProductData => res.json(dbProductData))
     .catch(err => {
@@ -33,12 +22,7 @@ router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   Product.findOne({
-    include: [
-      {
-        model: Category, 
-        
-      }
-    ],
+    include: [db.Category, db.Tag],
     where: {
       id: req.params.id
     }
@@ -60,15 +44,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
  console.log('req:', req.body);
   Product.create( req.body
-// {
-//   include: [
-//     {
-//       model: Tag,
-//       attributes: ['id'],
-//       as: 'tagIds'
-//     }
-//   ]
-// } // (THE REST OF THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
+ // (THE REST OF THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
    ) .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
