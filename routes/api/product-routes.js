@@ -44,6 +44,15 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
  console.log('req:', req.body);
   Product.create( req.body
+
+    // Pass into Insomnia Core as:
+  // {
+  //   product_name:,
+  //   price:,
+  //   stock:,
+  //   category_id:,
+  //   tagIds:
+  // }
  // (THE REST OF THIS ROUTE WAS ALREADY WRITTEN IN CLONED CODE)
    ) .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
